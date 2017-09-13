@@ -1,10 +1,10 @@
 package org.mvnsearch.spring.boot.shell;
 
+import java.util.logging.Logger;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.shell.support.logging.HandlerUtils;
-
-import java.util.logging.Logger;
 
 /**
  * spring shell application
@@ -22,6 +22,7 @@ public class SpringShellApplication {
         try {
             new BootShim(args, ctx).run();
         } finally {
+            ctx.close();
             HandlerUtils.flushAllHandlers(Logger.getLogger(""));
         }
     }
