@@ -20,8 +20,10 @@ public class SpringShellApplication {
     public static void run(Object[] sources, String[] args) {
         ConfigurableApplicationContext ctx = new SpringApplication(sources).run(args);
         try {
-            new BootShim(args, ctx).run();
+            // Place empty array to Spring Shell
+            new BootShim(new String[]{}, ctx).run();
         } finally {
+            ctx.close();
             HandlerUtils.flushAllHandlers(Logger.getLogger(""));
         }
     }
